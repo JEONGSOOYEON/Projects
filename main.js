@@ -7,17 +7,18 @@ const get = document.querySelector("#getBtn");
 inputDate.value=new Date().toISOString().slice(0, 10);
 inputTime.value=new Date().toISOString().slice(11, 16);
 
-
 function alertContents(event) {
-    alert(localStorage.getItem('date'));
-    alert(localStorage.getItem('time'));
-    alert(localStorage.getItem('text'));
+    const date = localStorage.getItem('date');
+    const time = localStorage.getItem('time');
+    const text = localStorage.getItem('text');
+    let contents = [date, time, text];
+    alert(contents);
 }
 
 function saveContents(event) {
-    savedDate = localStorage.setItem('date', inputDate.value);
-    savedTime = localStorage.setItem('time', inputTime.value);
-    savedText = localStorage.setItem('text', inputText.value);
+    localStorage.setItem('date', inputDate.value);
+    localStorage.setItem('time', inputTime.value);
+    localStorage.setItem('text', inputText.value);
 }
 
 submit.addEventListener("click", saveContents);
