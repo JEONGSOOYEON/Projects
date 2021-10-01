@@ -2,25 +2,29 @@ const inputDate = document.querySelector("#date");
 const inputTime = document.querySelector("#time");
 const inputText = document.querySelector("#text");
 const submit = document.querySelector("#submit");
-const get = document.querySelector("#getBtn");
 
 inputDate.value=new Date().toISOString().slice(0, 10);
-inputTime.value=new Date().toISOString().slice(11, 16);
+inputTime.value=new Date().toTimeString().slice(0, 5);
 
-function alertContents(event) {
-    const date = localStorage.getItem('date');
-    const time = localStorage.getItem('time');
-    const text = localStorage.getItem('text');
-    let contents = [date, time, text];
-    alert(contents);
+let toDos = [];
+
+function saveTodo(todoObj) {
+    const todo = localStorage.setItem("todos", JSON.stringify(todoObj));
+    const parsedtodo = JSON.parse(localStorage.getItem("todos"));
+    toDos.push(JSON.stringify(parsedtodo));
+    const alltodo = localStorage.setItem("allTodos", JSON.stringify(toDos));
 }
 
-function saveContents(event) {
-    localStorage.setItem('date', inputDate.value);
-    localStorage.setItem('time', inputTime.value);
-    localStorage.setItem('text', inputText.value);
+function handleTodoSubmit(event) {
+    event.preventDefault();
+    const todoObj = {
+        'date': inputDate.value,
+        'time': inputTime.value,
+        'text': inputText.value
+    }
+    saveTodo(todoObj); 
 }
 
-submit.addEventListener("click", saveContents);
+submit.addEventListener("click", handleTodoSubmit);
 
-get.addEventListener("click", alertContents);
+console.log(toDos)
