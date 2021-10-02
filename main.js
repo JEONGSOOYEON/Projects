@@ -8,11 +8,10 @@ inputTime.value=new Date().toTimeString().slice(0, 5);
 
 let toDos = [];
 
-function saveTodo(todoObj) {
-    const todo = localStorage.setItem("todos", JSON.stringify(todoObj));
-    const parsedtodo = JSON.parse(localStorage.getItem("todos"));
-    toDos.push(JSON.stringify(parsedtodo));
-    const alltodo = localStorage.setItem("allTodos", JSON.stringify(toDos));
+function saveTodos(todoObj) {
+    localStorage.setItem("todos", JSON.stringify(todoObj));
+    toDos.push(todoObj)
+    console.log(toDos)
 }
 
 function handleTodoSubmit(event) {
@@ -22,9 +21,8 @@ function handleTodoSubmit(event) {
         'time': inputTime.value,
         'text': inputText.value
     }
-    saveTodo(todoObj); 
+    inputText.value = "";
+    saveTodos(todoObj); 
 }
 
 submit.addEventListener("click", handleTodoSubmit);
-
-console.log(toDos)
