@@ -17,12 +17,23 @@ inputTime.value = new Date().toTimeString().slice(0, 5);
 
 let toDos = [];
 
+function matchTodos(parsedToDos) {
+    let dateToDos = [];
+    for (let i = 0; i < parsedToDos.length; i++) {
+    if (parsedToDos[i].date === YMD &&
+        parsedToDos[i].time === HM) {
+        dateToDos.push(parsedToDos[i]);
+        let todo = dateToDos.map((dateToDo) => dateToDo.text);
+        alert(todo);
+        }
+    }
+}
+
 function saveTodos() {
     localStorage.setItem("todos", JSON.stringify(toDos));
 }
 
 function handleTodoSubmit(event) {
-    event.preventDefault();
     const todoObj = {
         'date': inputDate.value,
         'time': inputTime.value,
@@ -36,16 +47,16 @@ function handleTodoSubmit(event) {
 submit.addEventListener("click", handleTodoSubmit);
 
 const savedToDos = localStorage.getItem("todos");
-const parsedToDos = JSON.parse(savedToDos);
-let dateToDos = [];
-    for (let i = 0; i < parsedToDos.length; i++) {
-        if (parsedToDos[i].date === YMD &&
-            parsedToDos[i].time === HM) {
-            dateToDos.push(parsedToDos[i]);
-            let result = dateToDos.map((dateToDo) => dateToDo.text);
-            alert(result);
-        }
-    }
+if (savedToDos !== null) {
+    const parsedToDos = JSON.parse(savedToDos);
+    toDos = parsedToDos;
+    matchTodos(parsedToDos);
+}
+
+
+
+
+
 
 
 
