@@ -3,6 +3,9 @@ import Input from './components/Input'
 import React, { Component } from 'react';
 
 class ToDo extends Component {
+  handleClick(e) {
+    e.preventDefault();
+  }
   render(){
     return (
       <div className="Reminder">
@@ -12,7 +15,7 @@ class ToDo extends Component {
         {/*<input type="date"></input>
         <input type="time"></input>
         <input type="text"></input>*/}
-        
+        <button onClick={this.handleClick}>Submit</button>
       </div>      
     );
   }
